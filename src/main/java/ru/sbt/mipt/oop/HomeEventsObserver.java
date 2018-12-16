@@ -1,5 +1,9 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.EventProcessors.*;
+import ru.sbt.mipt.oop.EventProviders.SensorEventProvider;
+import ru.sbt.mipt.oop.HomeComponents.SmartHome;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -32,6 +36,7 @@ public class HomeEventsObserver {
        registerEventProcessor(new LightEventProcessor());
        registerEventProcessor(new DoorEventProcessor());
        registerEventProcessor(new HallDoorEventProcessor());
+       registerEventProcessor(new AlarmEventProcessor());
     }
 
 }

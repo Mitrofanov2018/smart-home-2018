@@ -1,13 +1,17 @@
 package ru.sbt.mipt.oop;
 
 import org.junit.Test;
+import ru.sbt.mipt.oop.EventProcessors.EventProcessor;
+import ru.sbt.mipt.oop.EventProviders.SensorEventProvider;
+import ru.sbt.mipt.oop.HomeComponents.SmartHome;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class HomeEventsObserverTest {
 
 
-    public static class OneTimeEventProvider implements SensorEventProvider{
+    public static class OneTimeEventProvider implements SensorEventProvider {
 
         private SensorEvent event;
         private int callsCount = 0;

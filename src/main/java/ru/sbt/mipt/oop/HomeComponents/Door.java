@@ -1,4 +1,4 @@
-package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop.HomeComponents;
 
 public class Door implements Actionable {
     private final String id;

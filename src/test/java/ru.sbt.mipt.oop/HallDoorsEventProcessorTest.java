@@ -1,6 +1,13 @@
 package ru.sbt.mipt.oop;
 
 import org.junit.Test;
+import ru.sbt.mipt.oop.EventProcessors.HallDoorEventProcessor;
+import ru.sbt.mipt.oop.HomeComponents.Door;
+import ru.sbt.mipt.oop.HomeComponents.Light;
+import ru.sbt.mipt.oop.HomeComponents.Room;
+import ru.sbt.mipt.oop.HomeComponents.SmartHome;
+import ru.sbt.mipt.oop.Loaders.FileSmartHomeLoader;
+import ru.sbt.mipt.oop.Loaders.SmartHomeLoader;
 
 import java.io.IOException;
 

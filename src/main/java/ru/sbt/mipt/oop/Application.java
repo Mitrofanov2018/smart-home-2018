@@ -1,8 +1,11 @@
 package ru.sbt.mipt.oop;
 
+import ru.sbt.mipt.oop.EventProviders.RandomSensorEventProvider;
+import ru.sbt.mipt.oop.HomeComponents.SmartHome;
+import ru.sbt.mipt.oop.Loaders.FileSmartHomeLoader;
+import ru.sbt.mipt.oop.Loaders.SmartHomeLoader;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 
 public class Application {
 
@@ -20,6 +23,7 @@ public class Application {
         setSmartHomeLoader(new FileSmartHomeLoader());
 
         SmartHome smartHome = smartHomeLoader.loadSmartHome();
+
 
         homeEventsObserver.configureEventProcessors();
         homeEventsObserver.runEventsCycle(smartHome);

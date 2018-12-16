@@ -1,6 +1,12 @@
 package ru.sbt.mipt.oop;
 
 import org.junit.Test;
+import ru.sbt.mipt.oop.EventProcessors.DoorEventProcessor;
+import ru.sbt.mipt.oop.HomeComponents.Door;
+import ru.sbt.mipt.oop.HomeComponents.Room;
+import ru.sbt.mipt.oop.HomeComponents.SmartHome;
+import ru.sbt.mipt.oop.Loaders.FileSmartHomeLoader;
+import ru.sbt.mipt.oop.Loaders.SmartHomeLoader;
 
 import java.io.IOException;
 
@@ -19,7 +25,7 @@ public class DoorEventProcessorTest {
         SmartHome smartHome = smartHomeLoader.loadSmartHome(); // загружаем умный дом
 
 
-        String doorId1 = "3";
+        String doorId1 = "4";
 
         SensorEvent event1 = new SensorEvent(SensorEventType.DOOR_OPEN, doorId1);
 
