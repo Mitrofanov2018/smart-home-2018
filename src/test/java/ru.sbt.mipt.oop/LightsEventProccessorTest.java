@@ -18,7 +18,7 @@ public class LightsEventProccessorTest {
 
         SmartHome smartHome = smartHomeLoader.loadSmartHome(); // загружаем умный дом
 
-        String lightId1 = "4";
+        String lightId1 = "2";
 
         SensorEvent event1 = new SensorEvent(SensorEventType.LIGHT_ON, lightId1);
 

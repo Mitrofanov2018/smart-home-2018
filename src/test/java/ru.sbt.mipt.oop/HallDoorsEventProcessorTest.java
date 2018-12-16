@@ -20,6 +20,8 @@ public class HallDoorsEventProcessorTest {
 
         String doorId = hallDoorId(smartHome).getId();
 
+        System.out.println("Hall door id is: " + doorId );
+
         SensorEvent event1 = new SensorEvent(SensorEventType.DOOR_CLOSED, doorId);
 
 

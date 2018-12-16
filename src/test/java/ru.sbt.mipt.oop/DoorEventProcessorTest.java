@@ -15,14 +15,15 @@ public class DoorEventProcessorTest {
     public void testDoorprocessEvent() throws IOException {
 
 
+
         SmartHome smartHome = smartHomeLoader.loadSmartHome(); // загружаем умный дом
 
-        String doorId1 = "4";
+
+        String doorId1 = "3";
 
         SensorEvent event1 = new SensorEvent(SensorEventType.DOOR_OPEN, doorId1);
 
         SensorEvent event2 = new SensorEvent(SensorEventType.DOOR_CLOSED, doorId1);
-
 
 
         if (getDoorById(smartHome, doorId1).getIsOpen()) {  // если дверь открыта, то закроем ее и проверим закралась ли
