@@ -1,12 +1,12 @@
 package ru.sbt.mipt.oop;
 
 import java.io.IOException;
-
-import static ru.sbt.mipt.oop.SensorEventType.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class Application {
 
-    private static SmartHomeLoader smartHomeLoader = new FileSmartHomeLoader();
+    private static SmartHomeLoader smartHomeLoader;
 
     public static void setSmartHomeLoader(SmartHomeLoader smartHomeLoader) {
         Application.smartHomeLoader = smartHomeLoader;
@@ -16,12 +16,13 @@ public class Application {
     public static void main(String... args) throws IOException {
 
         // считываем состояние дома из файла
-       setSmartHomeLoader(new FileSmartHomeLoader());
+        setSmartHomeLoader(new FileSmartHomeLoader());
 
-       SmartHome smartHome = smartHomeLoader.loadSmartHome();
+        SmartHome smartHome = smartHomeLoader.loadSmartHome();
 
-       runEventsCycle(smartHome);
+        //      smartHome.printToSystem();
 
+        runEventsCycle(smartHome);
 
     }
 
@@ -30,24 +31,23 @@ public class Application {
 
         // Получаем событие
         SensorEvent event = RandomSensorEventProvider.getNextSensorEvent();
-
+        Collection<EventProcessor> eventProcessors = configureEventProcessors();
 
         // начинаем цикл обработки событий
         while (event != null) {
             System.out.println("Got event: " + event);
-
-            if (event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF) {
-                // событие от источника света
-                LightEventProcessor.processLightEvent(smartHome, event);
-
-            }
-            if (event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED) {
-                // событие от двери
-                DoorEventProccesor.processDoorEvent(smartHome, event);
+            for (EventProcessor eventProcessor : eventProcessors) {
+                eventProcessor.processEvent(smartHome, event);
             }
             event = RandomSensorEventProvider.getNextSensorEvent();
         }
     }
 
-
+    private static Collection<EventProcessor> configureEventProcessors() {
+        Collection<EventProcessor> eventProcessors = new ArrayList<>();
+        eventProcessors.add(new LightEventProcessor());
+        eventProcessors.add(new DoorEventProcessor());
+        eventProcessors.add(new HallDoorEventProcessor());
+        return eventProcessors;
+    }
 }
