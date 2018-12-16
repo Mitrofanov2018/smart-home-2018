@@ -10,6 +10,5 @@ public class Main {
         SmartHome smartHome = new FileSmartHomeLoader().loadSmartHome();
         smartHome.printToSystem();
 
-
     }
 }

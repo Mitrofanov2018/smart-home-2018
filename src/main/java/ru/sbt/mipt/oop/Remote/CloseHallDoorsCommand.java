@@ -17,7 +17,9 @@ public class CloseHallDoorsCommand implements RemoteCommand {
     public void execute() {
        Collection<Door> hallDoors = findHallDoors();
        for (Door hallDoor : hallDoors){
+           System.out.println("");
            System.out.println("Hall door with id: " +  hallDoor.getId() + " was close by Remote");
+           System.out.println("");
            hallDoor.setOpen(false);
        }
     }

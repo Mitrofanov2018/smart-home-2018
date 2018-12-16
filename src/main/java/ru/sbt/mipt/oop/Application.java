@@ -19,14 +19,14 @@ public class Application {
         sensorEventsManager.runEventsCycle();
 
 
+
+       // Проверяем пульт
+        SmartHome smartHome = new FileSmartHomeLoader().loadSmartHome();
+
         System.out.println("");
         System.out.println("");
         System.out.println("");
         System.out.println("Пульт:");
-
-
-       // Проверяем пульт
-        SmartHome smartHome = new FileSmartHomeLoader().loadSmartHome();
 
         MyRC remote = new MyRC(smartHome);
         remote.initializateMyRC();
@@ -39,6 +39,7 @@ public class Application {
 
         remote1.onButtonPressed("B");
 
+        remote.onButtonPressed("A");
 
     }
 }

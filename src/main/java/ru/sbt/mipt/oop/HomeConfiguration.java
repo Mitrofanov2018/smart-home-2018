@@ -1,7 +1,9 @@
 package ru.sbt.mipt.oop;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import ru.sbt.mipt.oop.EventProcessors.*;
 import ru.sbt.mipt.oop.HomeComponents.SmartHome;
 import ru.sbt.mipt.oop.Loaders.FileSmartHomeLoader;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 @Configuration
+@ComponentScan
 public class HomeConfiguration {
     private static SmartHome smartHome;
     private EventManager manager;
@@ -51,11 +54,13 @@ public class HomeConfiguration {
     }
 
     private static Collection<EventProcessor> configureEventProcessors(){
+
         Collection<EventProcessor> eventProcessors = new ArrayList<>();
-        eventProcessors.add(new LightEventProcessor());
-        eventProcessors.add(new DoorEventProcessor());
-        eventProcessors.add(new HallDoorEventProcessor());
-        eventProcessors.add(new AlarmEventProcessor());
+        eventProcessors.add(new SMSSenderDecorator(new AlarmDecorator(new LightEventProcessor(), smartHome), smartHome));
+        eventProcessors.add(new SMSSenderDecorator(new AlarmDecorator(new DoorEventProcessor(), smartHome), smartHome));
+        eventProcessors.add(new SMSSenderDecorator(new AlarmDecorator(new HallDoorEventProcessor(), smartHome), smartHome));
+        eventProcessors.add(new SMSSenderDecorator(new AlarmDecorator(new AlarmEventProcessor(), smartHome), smartHome));
+
         return eventProcessors;
     }
 }

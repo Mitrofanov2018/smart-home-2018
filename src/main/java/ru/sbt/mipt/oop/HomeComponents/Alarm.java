@@ -43,7 +43,7 @@ public class Alarm {
         return this.password.equals(password);
     }
 
-    public void startAlarm() {
+    public void startAlert() {
         state.startAlert();
     }
 

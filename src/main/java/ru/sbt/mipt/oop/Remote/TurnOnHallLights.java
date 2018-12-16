@@ -17,7 +17,9 @@ public class TurnOnHallLights implements RemoteCommand{
     public void execute() {
         Collection<Light> hallLights = findHallLights();
         for (Light hallDoor : hallLights){
+            System.out.println("");
             System.out.println("Hall light with id: " +  hallDoor.getId() + " was turn on by Remote");
+            System.out.println("");
             hallDoor.setOn(true);
         }
     }

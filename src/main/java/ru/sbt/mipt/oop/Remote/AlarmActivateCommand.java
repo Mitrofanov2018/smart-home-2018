@@ -13,7 +13,9 @@ public class AlarmActivateCommand implements RemoteCommand {
 
     @Override
     public void execute() {
+        System.out.println("");
         System.out.println("Alarm was activate by Remote");
+        System.out.println("");
         smartHome.getAlarm().activate(password);
     }
 }

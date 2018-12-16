@@ -11,8 +11,9 @@ public class AlarmAlertCommand implements RemoteCommand {
 
     @Override
     public void execute() {
+        System.out.println("");
         System.out.println("Alarm was move to alert state by Remote");
-
-        smartHome.getAlarm().startAlarm();
+        System.out.println("");
+        smartHome.getAlarm().startAlert();
     }
 }

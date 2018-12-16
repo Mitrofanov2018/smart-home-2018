@@ -17,7 +17,9 @@ public class TurnOnAllLights implements RemoteCommand {
     }
 
     public void turnOnLights() {
+        System.out.println("");
         System.out.println("All lights was turn on by remote");
+        System.out.println("");
 
         for (Room homeRoom : smartHome.getRooms()) {
             for (Light light : homeRoom.getLights()) {

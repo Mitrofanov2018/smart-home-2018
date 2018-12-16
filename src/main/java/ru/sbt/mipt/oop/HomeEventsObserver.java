@@ -8,7 +8,7 @@ import ru.sbt.mipt.oop.HomeComponents.SmartHome;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class HomeEventsObserver implements EventManager{
+public class HomeEventsObserver implements EventManager {
 
     private SmartHome smartHome;
     private final Collection<EventProcessor> eventProcessors = new ArrayList<>();
@@ -19,12 +19,12 @@ public class HomeEventsObserver implements EventManager{
         sensorEventProvider = new RandomSensorEventProvider();
     }
 
-    public void setupSensorEventProvider(SensorEventProvider sensorEventProvider){
+    public void setupSensorEventProvider(SensorEventProvider sensorEventProvider) {
         this.sensorEventProvider = sensorEventProvider;
     }
 
     @Override
-    public void registerEventProcessor(EventProcessor eventProcessor){
+    public void registerEventProcessor(EventProcessor eventProcessor) {
         eventProcessors.add(eventProcessor);
     }
 
@@ -40,15 +40,5 @@ public class HomeEventsObserver implements EventManager{
             event = sensorEventProvider.getNextSensorEvent();
         }
     }
-
-    public void configureEventProcessors(){
-       registerEventProcessor(new LightEventProcessor());
-       registerEventProcessor(new DoorEventProcessor());
-       registerEventProcessor(new HallDoorEventProcessor());
-       registerEventProcessor(new AlarmEventProcessor());
-    }
-
-
-
 
 }
