@@ -19,6 +19,10 @@ public class HomeEventsObserver implements EventManager{
         sensorEventProvider = new RandomSensorEventProvider();
     }
 
+    public void setupSensorEventProvider(SensorEventProvider sensorEventProvider){
+        this.sensorEventProvider = sensorEventProvider;
+    }
+
     @Override
     public void registerEventProcessor(EventProcessor eventProcessor){
         eventProcessors.add(eventProcessor);
@@ -45,8 +49,6 @@ public class HomeEventsObserver implements EventManager{
     }
 
 
-    public void setupSensorEventProvider(SensorEventProvider sensorEventProvider) {
-        this.sensorEventProvider = sensorEventProvider;
 
-    }
+
 }

@@ -15,6 +15,14 @@ public class Door implements Actionable {
 
     public void setOpen(boolean open) {
         isOpen = open;
+
+        if(open){
+            System.out.println("Door №: " + id + " was open.");
+        }
+        else {
+            System.out.println("Door №: " + id + " was close.");
+        }
+
     }
 
     public boolean getIsOpen() {

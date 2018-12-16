@@ -3,6 +3,7 @@ package ru.sbt.mipt.oop.EventProcessors;
 import ru.sbt.mipt.oop.AlarmState.AlarmActiveState;
 import ru.sbt.mipt.oop.AlarmState.AlarmAlertState;
 import ru.sbt.mipt.oop.HomeComponents.Door;
+import ru.sbt.mipt.oop.HomeComponents.Light;
 import ru.sbt.mipt.oop.HomeComponents.Room;
 import ru.sbt.mipt.oop.SensorEvent;
 import ru.sbt.mipt.oop.HomeComponents.SmartHome;
@@ -23,12 +24,20 @@ public class HallDoorEventProcessor implements EventProcessor {
                     Door door = (Door) object;
                     if (door.getId().equals(event.getObjectId())) {
                         if (isHallDoor(smartHome, door)) {
-                            System.out.println("Hall door closed, turning off all lights in the SmartHome");
-                            smartHome.turnOffLights();
+                            System.out.println("Hall door closed, turning off all lights in the SmartHome:");
+                            turnOffLights(smartHome);
                         }
                     }
                 }
             });
+        }
+    }
+
+    public void turnOffLights(SmartHome smartHome) {
+        for (Room homeRoom :  smartHome.getRooms()) {
+            for (Light light : homeRoom.getLights()) {
+                light.setOn(false);
+            }
         }
     }
 

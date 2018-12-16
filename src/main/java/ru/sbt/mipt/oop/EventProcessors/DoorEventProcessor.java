@@ -23,9 +23,9 @@ public class DoorEventProcessor implements EventProcessor {
 
                     if (door.getId().equals(event.getObjectId())) {
                         if (event.getType() == DOOR_OPEN) {
-                            changeDoorState(door, true, " was opened.");
+                            door.setOpen(true);
                         } else {
-                            changeDoorState(door, false, " was closed.");
+                            door.setOpen(false);
                         }
                     }
                 }
@@ -42,10 +42,6 @@ public class DoorEventProcessor implements EventProcessor {
         }
     }
 
-    private void changeDoorState(Door door, boolean opened, String s) {
-        door.setOpen(opened);
-        System.out.println("Door " + door.getId() +  s);
-    }
 
     private boolean isDoorEvent(SensorEvent event) {
        return( event.getType() == DOOR_OPEN || event.getType() == DOOR_CLOSED);

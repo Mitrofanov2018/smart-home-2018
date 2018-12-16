@@ -22,9 +22,9 @@ public class LightEventProcessor implements EventProcessor {
                     Light light = (Light) object;
                     if (light.getId().equals(event.getObjectId())) {
                         if (event.getType() == LIGHT_ON) {
-                            changeLightState(light, true, " was turned on.");
+                            light.setOn(true);
                         } else {
-                            changeLightState(light, false, " was turned off.");
+                            light.setOn(false);
                         }
                     }
                 }
@@ -40,11 +40,6 @@ public class LightEventProcessor implements EventProcessor {
     }
 
 
-    private void changeLightState(Light light, boolean isOn, String s) {
-        light.setOn(isOn);
-        System.out.println("Light " + light.getId() + s);
-
-    }
 
     private boolean isLightEvent(SensorEvent event) {
         return (event.getType() == LIGHT_ON || event.getType() == LIGHT_OFF);

@@ -52,15 +52,7 @@ public class SmartHome implements Actionable, Printable {
         }
     }
 
-    public void turnOffLights() {
-        for (Room homeRoom : getRooms()) {
-            for (Light light : homeRoom.getLights()) {
-                light.setOn(false);
-                System.out.println("Light " + light.getId() + " was turn off.");
 
-            }
-        }
-    }
 
     public boolean isAlarmDeactivated(){
         return this.alarm.getState() instanceof AlarmDeactiveState;
@@ -73,5 +65,7 @@ public class SmartHome implements Actionable, Printable {
     public void deactivateAlarm(String password){
         this.alarm.deactivate(password);
     }
+
+
 }
 

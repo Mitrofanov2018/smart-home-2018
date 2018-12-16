@@ -19,6 +19,12 @@ public class Light implements Actionable{
 
     public void setOn(boolean on) {
         isOn = on;
+        if(on){
+            System.out.println("Light №: " + id + " was turn on.");
+        }
+        else {
+            System.out.println("Light №: " + id + " was turn off.");
+        }
     }
 
     @Override
