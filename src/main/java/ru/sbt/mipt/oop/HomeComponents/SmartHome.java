@@ -56,8 +56,6 @@ public class SmartHome implements Actionable, Printable {
         for (Room homeRoom : getRooms()) {
             for (Light light : homeRoom.getLights()) {
                 light.setOn(false);
-                SensorCommand command = new SensorCommand(CommandType.LIGHT_OFF, light.getId());
-                SensorCommandExecutor.sendCommand(command);
                 System.out.println("Light " + light.getId() + " was turn off.");
 
             }

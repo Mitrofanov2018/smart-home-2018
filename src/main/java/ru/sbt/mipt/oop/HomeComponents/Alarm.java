@@ -13,14 +13,12 @@ public class Alarm {
     }
 
     public Alarm() {
-        System.out.println("*************AlarmState was create*************");
         this.password = "0000";
         this.state = new AlarmDeactiveState(this);
 
     }
 
     public Alarm(String password) {
-        System.out.println("*************AlarmState was create*************");
         this.password = password;
         this.state = new AlarmDeactiveState(this);
     }

@@ -7,13 +7,13 @@ public class AlarmActiveState implements AlarmState {
 
     public AlarmActiveState(Alarm alarm) {
         this.alarm = alarm;
-        System.out.println("AlarmState activated.");
+        System.out.println("Alarm activated.");
     }
 
     @Override
     public void activate(String password) {
         if(this.alarm.checkPassword(password)) {
-            System.out.println("AlarmState is already active!");
+            System.out.println("Alarm is already active!");
         } else {
             System.out.print("Wrong password to activate:  ");
             startAlert();
@@ -23,7 +23,6 @@ public class AlarmActiveState implements AlarmState {
     @Override
     public void deactivate(String password) {
        if( alarm.checkPassword(password)){
-           System.out.println("AlarmState successfully deactivated!");
            alarm.changeState(new AlarmDeactiveState(alarm));
        }
        else {
@@ -34,7 +33,6 @@ public class AlarmActiveState implements AlarmState {
 
     @Override
     public void startAlert() {
-        System.out.println("Alert from active state!!!");
         alarm.changeState(new AlarmAlertState(alarm));
     }
 }

@@ -12,23 +12,22 @@ public class AlarmAlertState implements AlarmState {
 
     @Override
     public void activate(String password) {
-        System.out.println("Someone try to activate alert from AlertState");
+        System.out.println("Someone try to activate alarm from alert state");
     }
 
     @Override
     public void deactivate(String password) {
         if(alarm.checkPassword(password)){
             alarm.changeState(new AlarmDeactiveState(alarm));
-            System.out.println("AlarmState disabled");
         }
         else {
-            System.out.println("Alert!!! Wrong code!!!");
+            System.out.println("Alert!!! Wrong password!!!");
         }
     }
 
     @Override
     public void startAlert() {
-        System.out.println("AlarmState is already started!");
+        System.out.println("Alarm is already started!");
 
     }
 }

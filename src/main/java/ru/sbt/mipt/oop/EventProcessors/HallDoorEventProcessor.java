@@ -15,23 +15,20 @@ public class HallDoorEventProcessor implements EventProcessor {
 
     @Override
     public void processEvent(SmartHome smartHome, SensorEvent event) {
+        if (!isDoorCloseEvent(event)) return;
+
         if(smartHome.isAlarmDeactivated()) {
             smartHome.executeAction(object -> {
-                if (!isDoorCloseEvent(event)) return;
-
                 if (object instanceof Door) {
                     Door door = (Door) object;
                     if (door.getId().equals(event.getObjectId())) {
-                        if (isHallDoor(smartHome, door))
+                        if (isHallDoor(smartHome, door)) {
+                            System.out.println("Hall door closed, turning off all lights in the SmartHome");
                             smartHome.turnOffLights();
+                        }
                     }
                 }
             });
-        } else if(smartHome.getAlarm().getState() instanceof AlarmActiveState) {
-            smartHome.getAlarm().startAlarm();
-            System.out.println("Sending sms!");
-        } else if(smartHome.getAlarm().getState() instanceof AlarmAlertState){
-            System.out.println("Sending sms!");
         }
     }
 

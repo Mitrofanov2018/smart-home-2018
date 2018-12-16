@@ -8,7 +8,7 @@ public class AlarmDeactiveState implements AlarmState {
 
     public AlarmDeactiveState(Alarm alarm) {
         this.alarm = alarm;
-        System.out.println("AlarmState was deactivate.");
+        System.out.println("Alarm was deactivate.");
     }
 
 
@@ -16,7 +16,6 @@ public class AlarmDeactiveState implements AlarmState {
     public void activate(String password) {
         if(alarm.checkPassword(password)) {
             alarm.changeState(new AlarmActiveState(alarm));
-            System.out.println("AlarmState was activate. The SmartHome is under control.");
         }
         else {
             System.out.print("Password is wrong: ");
@@ -26,12 +25,11 @@ public class AlarmDeactiveState implements AlarmState {
 
     @Override
     public void deactivate(String code) {
-        System.out.println("AlarmState is already deactivated.");
+        System.out.println("Alarm is already deactivated.");
     }
 
     @Override
     public void startAlert() {
-        System.out.println("Alert from deactivate state!!!");
         alarm.changeState(new AlarmAlertState(alarm));
     }
 }

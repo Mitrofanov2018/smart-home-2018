@@ -12,10 +12,11 @@ import static ru.sbt.mipt.oop.SensorEventType.DOOR_OPEN;
 public class DoorEventProcessor implements EventProcessor {
 
     public void processEvent(SmartHome smartHome, SensorEvent event){
+        if(!isDoorEvent(event)) return;
+
         if(smartHome.isAlarmDeactivated()) {
 
             smartHome.executeAction(object -> {
-                if(!isDoorEvent(event)) return;
 
                 if (object instanceof Door) {
                     Door door = (Door) object;
@@ -31,9 +32,12 @@ public class DoorEventProcessor implements EventProcessor {
             });
 
         } else if(smartHome.getAlarm().getState() instanceof AlarmActiveState) {
+            System.out.println("Some one try to change door №: " + event.getObjectId() + "  state, but alarm is active");
             smartHome.getAlarm().startAlarm();
             System.out.println("Sending sms!");
+
         } else if(smartHome.getAlarm().getState() instanceof AlarmAlertState){
+            System.out.println("Some one try to change door №: " + event.getObjectId() + "  state, but alarm is Alert");
             System.out.println("Sending sms!");
         }
     }

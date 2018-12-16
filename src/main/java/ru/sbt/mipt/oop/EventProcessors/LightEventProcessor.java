@@ -14,14 +14,12 @@ public class LightEventProcessor implements EventProcessor {
     @Override
     public void processEvent(SmartHome smartHome, SensorEvent event) {
 
+        if (!isLightEvent(event)) return;
+
         if(smartHome.isAlarmDeactivated()) {
-
             smartHome.executeAction(object -> {
-                if (!isLightEvent(event)) return;
-
                 if (object instanceof Light) {
                     Light light = (Light) object;
-
                     if (light.getId().equals(event.getObjectId())) {
                         if (event.getType() == LIGHT_ON) {
                             changeLightState(light, true, " was turned on.");
@@ -32,9 +30,11 @@ public class LightEventProcessor implements EventProcessor {
                 }
             });
         } else if(smartHome.getAlarm().getState() instanceof AlarmActiveState) {
+            System.out.println("Some one try to change light №: " + event.getObjectId() + "  state, but alarm is active");
             smartHome.getAlarm().startAlarm();
             System.out.println("Sending sms!");
         } else if(smartHome.getAlarm().getState() instanceof AlarmAlertState){
+            System.out.println("Some one try to change door №: " + event.getObjectId() + "  state, but alarm is alert");
             System.out.println("Sending sms!");
         }
     }
