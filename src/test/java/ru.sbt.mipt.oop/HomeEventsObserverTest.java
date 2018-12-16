@@ -1,9 +1,12 @@
-/* package ru.sbt.mipt.oop;
+package ru.sbt.mipt.oop;
 
 import org.junit.Test;
 import ru.sbt.mipt.oop.EventProcessors.EventProcessor;
 import ru.sbt.mipt.oop.EventProviders.SensorEventProvider;
 import ru.sbt.mipt.oop.HomeComponents.SmartHome;
+import ru.sbt.mipt.oop.Loaders.FileSmartHomeLoader;
+
+import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -51,11 +54,14 @@ public class HomeEventsObserverTest {
 
 
     @Test
-    public void test(){
+    public void test() throws IOException {
+        SmartHome smartHome = new FileSmartHomeLoader().loadSmartHome();
+
         SensorEvent sensorEvent = new SensorEvent(SensorEventType.DOOR_OPEN, "1");
 
-        HomeEventsObserver homeEventsObserver = new HomeEventsObserver(
-                new OneTimeEventProvider(sensorEvent));
+        HomeEventsObserver homeEventsObserver = new HomeEventsObserver(smartHome);
+        homeEventsObserver.setupSensorEventProvider(new OneTimeEventProvider(sensorEvent));
+
 
         CountingEventProcessor processor1 = new CountingEventProcessor();
         CountingEventProcessor processor2 = new CountingEventProcessor();
@@ -65,7 +71,7 @@ public class HomeEventsObserverTest {
         homeEventsObserver.registerEventProcessor(processor2);
         homeEventsObserver.registerEventProcessor(processor2);
 
-        homeEventsObserver.runEventsCycle(new SmartHome());
+        homeEventsObserver.runEventsCycle();
 
         assertEquals(1, processor1.getCount());
         assertEquals(sensorEvent, processor1.getReceivedEvent());
@@ -75,5 +81,3 @@ public class HomeEventsObserverTest {
 
     }
 }
-
-*/

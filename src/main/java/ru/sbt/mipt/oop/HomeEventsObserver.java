@@ -45,6 +45,8 @@ public class HomeEventsObserver implements EventManager{
     }
 
 
+    public void setupSensorEventProvider(SensorEventProvider sensorEventProvider) {
+        this.sensorEventProvider = sensorEventProvider;
 
-
+    }
 }
